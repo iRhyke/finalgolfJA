@@ -151,7 +151,7 @@ export default function Trial() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10">
+              <div>
                 <h3 className="text-xl font-bold text-[#111111] mb-2">体験予約フォーム</h3>
                 <p className="text-gray-500 text-sm mb-8">以下のカレンダーからご希望の日時をお選びください</p>
                 {selectedPlan && (
