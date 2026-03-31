@@ -2,16 +2,16 @@ import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from "r
 import { useEffect } from "react";
 import Layout from "./Layout";
 import Home from "./pages/Home";
-import facility from "./pages/facility";
-import simulator from "./pages/simulator";
-import pricing from "./pages/pricing";
-import access from "./pages/access";
-import faq from "./pages/faq";
-import trial from "./pages/trial";
-import contact from "./pages/contact";
-import tokushoho from "./pages/tokushoho";
-import privacy from "./pages/privacy";
-import terms from "./pages/terms";
+import Facility from "./pages/Facility";
+import Simulator from "./pages/Simulator";
+import Pricing from "./pages/Pricing";
+import Access from "./pages/Access";
+import Faq from "./pages/Faq";
+import Trial from "./pages/Trial";
+import Contact from "./pages/Contact";
+import Tokushoho from "./pages/Tokushoho";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -28,16 +28,16 @@ export default function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/facility" element={<facility />} />
-          <Route path="/simulator" element={<simulator />} />
-          <Route path="/pricing" element={<pricing />} />
-          <Route path="/access" element={<access />} />
-          <Route path="/faq" element={<faq />} />
-          <Route path="/trial" element={<trial />} />
-          <Route path="/contact" element={<contact />} />
-          <Route path="/tokushoho" element={<tokushoho />} />
-          <Route path="/privacy" element={<privacy />} />
-          <Route path="/terms" element={<terms />} />
+          <Route path="/facility" element={<Facility />} />
+          <Route path="/simulator" element={<Simulator />} />
+          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/access" element={<Access />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/trial" element={<Trial />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/tokushoho" element={<Tokushoho />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/terms" element={<Terms />} />
           <Route path="/equipment" element={<Navigate to="/facility" replace />} />
         </Routes>
       </Layout>
