@@ -31,7 +31,7 @@ const plans = [
   },
 ];
 
-export default function PricingPreview() {
+export default function pricingPreview() {
   const [openIndex, setOpenIndex] = useState(null);
 
   const handleToggle = (index) => {
@@ -49,7 +49,7 @@ export default function PricingPreview() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">Pricing</span>
+          <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">pricing</span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#111111]">料金プラン</h2>
           <div className="w-12 h-0.5 bg-[#C8A96E] mx-auto mt-6" />
           <p className="mt-4 text-gray-500 text-sm">
@@ -125,7 +125,7 @@ export default function PricingPreview() {
 
         <div className="text-center mt-10">
           <Link
-            to={createPageUrl("Pricing")}
+            to={createPageUrl("pricing")}
             className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
           >
             全てのプランを見る

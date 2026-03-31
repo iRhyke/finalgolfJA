@@ -1,10 +1,10 @@
 import React from "react";
 import HeroSection from "../components/home/HeroSection";
 import FeaturesSection from "../components/home/FeaturesSection";
-import SimulatorPreview from "../components/home/SimulatorPreview";
-import PricingPreview from "../components/home/PricingPreview";
+import simulatorPreview from "../components/home/simulatorPreview";
+import pricingPreview from "../components/home/pricingPreview";
 import FlowSection from "../components/home/FlowSection";
-import AccessPreview from "../components/home/AccessPreview";
+import accessPreview from "../components/home/accessPreview";
 import LINESection from "../components/home/LINESection";
 import CTASection from "../components/home/CTASection";
 
@@ -13,10 +13,10 @@ export default function Home() {
     <div>
       <HeroSection />
       <FeaturesSection />
-      <SimulatorPreview />
-      <PricingPreview />
+      <simulatorPreview />
+      <pricingPreview />
       <FlowSection />
-      <AccessPreview />
+      <accessPreview />
       <LINESection />
       <CTASection />
     </div>

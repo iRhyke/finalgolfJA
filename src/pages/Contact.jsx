@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-export default function Contact() {
+export default function contact() {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -43,7 +43,7 @@ export default function Contact() {
   return (
     <div>
       <PageHeader
-        subtitle="Contact"
+        subtitle="contact"
         title="お問い合わせ"
         description="ご質問・ご相談はお気軽にお問い合わせください"
       />

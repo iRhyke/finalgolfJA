@@ -42,11 +42,11 @@ const gallery = [
   },
 ];
 
-export default function Facility() {
+export default function facility() {
   return (
     <div>
       <PageHeader
-        subtitle="Facility"
+        subtitle="facility"
         title="施設紹介"
         description="最先端のシミュレーターと、プライベートを重視した上質な空間。"
       />

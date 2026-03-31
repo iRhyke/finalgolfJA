@@ -32,7 +32,7 @@ const items = [
   },
 ];
 
-export default function Tokushoho() {
+export default function tokushoho() {
   return (
     <div>
       <PageHeader

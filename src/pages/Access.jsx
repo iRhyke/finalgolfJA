@@ -5,11 +5,11 @@ import { createPageUrl } from "@/utils";
 import PageHeader from "../components/shared/PageHeader";
 import { MapPin, Clock, Car, ChevronRight } from "lucide-react";
 
-export default function Access() {
+export default function access() {
   return (
     <div>
       <PageHeader
-        subtitle="Access"
+        subtitle="access"
         title="アクセス"
         description="ゴルフサロングリーン 高針インター店へのアクセス方法"
       />
@@ -87,7 +87,7 @@ export default function Access() {
               </div>
 
               <Link
-                to={createPageUrl("Trial")}
+                to={createPageUrl("trial")}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#C8A96E] hover:bg-[#b8995e] text-white font-semibold rounded-full transition-all text-sm"
               >
                 体験予約はこちら

@@ -42,7 +42,7 @@ const benefits = [
   "無理な勧誘は一切なし",
 ];
 
-export default function Trial() {
+export default function trial() {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -79,7 +79,7 @@ export default function Trial() {
   return (
     <div>
       <PageHeader
-        subtitle="Trial & Join"
+        subtitle="trial & Join"
         title="初回体験・入会案内"
         description="まずは気軽に体験してみてください"
       />

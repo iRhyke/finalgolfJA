@@ -38,11 +38,11 @@ const features = [
   "コンペモード搭載",
 ];
 
-export default function Simulator() {
+export default function simulator() {
   return (
     <div>
       <PageHeader
-        subtitle="Simulator"
+        subtitle="simulator"
         title="シミュレーター紹介"
         description="GOLFZON最高級モデル「VISION Plus」の実力"
       />

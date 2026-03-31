@@ -11,7 +11,7 @@ const specs = [
   "左右打席対応",
 ];
 
-export default function SimulatorPreview() {
+export default function simulatorPreview() {
   return (
     <section className="py-24 lg:py-32 bg-[#F9FAFB]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -42,7 +42,7 @@ export default function SimulatorPreview() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">Simulator</span>
+            <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">simulator</span>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#111111] leading-tight">
               GOLFZON
               <br />
@@ -65,7 +65,7 @@ export default function SimulatorPreview() {
             </ul>
 
             <Link
-              to={createPageUrl("Simulator")}
+              to={createPageUrl("simulator")}
               className="inline-flex items-center gap-2 mt-8 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
             >
               シミュレーターの詳細を見る

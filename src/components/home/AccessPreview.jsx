@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { MapPin, Clock, Car, ChevronRight } from "lucide-react";
 
-export default function AccessPreview() {
+export default function accessPreview() {
   return (
     <section className="py-20 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,7 +13,7 @@ export default function AccessPreview() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">Access</span>
+          <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">access</span>
           <h2 className="mt-3 text-3xl sm:text-4xl font-bold text-[#111111]">アクセス</h2>
           <div className="w-12 h-0.5 bg-[#C8A96E] mx-auto mt-6" />
         </motion.div>

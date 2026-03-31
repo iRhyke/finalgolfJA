@@ -54,11 +54,11 @@ const plans = [
   },
 ];
 
-export default function Pricing() {
+export default function pricing() {
   return (
     <div>
       <PageHeader
-        subtitle="Pricing"
+        subtitle="pricing"
         title="料金プラン"
         description="ライフスタイルに合わせて選べる5つのプラン"
       />

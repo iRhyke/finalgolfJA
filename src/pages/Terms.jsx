@@ -1,7 +1,7 @@
 import React from "react";
 import PageHeader from "../components/shared/PageHeader";
 
-export default function Terms() {
+export default function terms() {
   return (
     <div>
       <PageHeader
