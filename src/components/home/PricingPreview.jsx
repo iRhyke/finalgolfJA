@@ -1,8 +1,7 @@
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Star, ChevronDown, Check, Clock } from "lucide-react";
+import { motion } from "framer-motion";
+import { ChevronRight, Star, Check, Clock } from "lucide-react";
 
 const plans = [
   {
@@ -52,20 +51,7 @@ const plans = [
   },
 ];
 
-<<<<<<< HEAD
-export default function pricingPreview() {
-  const [openIndex, setOpenIndex] = useState(null);
-=======
 export default function PricingPreview() {
-  const [openIndex, setOpenIndex] = useState(/** @type {number | null} */ (null));
->>>>>>> prototype-1
-
-  const handleToggle = (/** @type {number} */ index) => {
-    if (window.innerWidth < 768) {
-      setOpenIndex(openIndex === index ? null : index);
-    }
-  };
-
   return (
     <section className="py-24 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +69,7 @@ export default function PricingPreview() {
           </p>
         </motion.div>
 
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             {plans.filter(plan => plan.name === "オールタイム" || plan.name === "オールタイムゴールド").map((plan, index) => (
               <motion.div
@@ -186,55 +172,16 @@ export default function PricingPreview() {
             ))}
           </div>
 
-
-<<<<<<< HEAD
-                 <div className={`mt-4 overflow-hidden transition-all duration-300 ease-in-out md:max-h-[500px] md:opacity-100 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-                   <div className={`text-sm ${plan.popular ? "text-white/70" : "text-gray-500"}`}>
-                     <p className="mb-1">{plan.time}</p>
-                     <p>{plan.period}</p>
-                   </div>
-                   
-                   <div className="mt-6">
-                     <Link
-                       to={`/trial?plan=${plan.id}`}
-                       onClick={(e) => e.stopPropagation()}
-                       className={`group flex items-center justify-center gap-2 w-full py-3 px-4 rounded-full text-sm font-bold transition-all ${
-                         plan.popular
-                           ? "bg-[#C8A96E] hover:bg-[#b8995e] text-white"
-                           : "bg-[#1B5E3B] hover:bg-[#0F3D25] text-white"
-                       }`}
-                     >
-                       このプランで体験予約
-                       <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                     </Link>
-                   </div>
-                 </div>
-               </motion.div>
-             );
-          })}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            to={createPageUrl("pricing")}
-            className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
-          >
-            全てのプランを見る
-            <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
-=======
-         <div className="text-center mt-10">
+          <div className="text-center mt-10">
             <Link
-             to={createPageUrl("Pricing")}
-             className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
-           >
-             全てのプランを見る
-             <ChevronRight className="w-4 h-4" />
-           </Link>
-         </div>
-        </div> 
->>>>>>> prototype-1
+              to={createPageUrl("Pricing")}
+              className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
+            >
+              全てのプランを見る
+              <ChevronRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );

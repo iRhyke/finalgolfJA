@@ -51,9 +51,9 @@ export default function FacilityPreview() {
               viewport={{ once: true }}
             >
               <h2 className="text-3xl font-bold text-[#111111] mb-6">
-                妥協のない
+                最高の環境で、
                 <br />
-                <span className="text-[#1B5E3B]">練習環境を、その手に。</span>
+                <span className="text-[#1B5E3B]">最高の練習を。</span>
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
                 ゴルフサロングリーン 高針インター店は、全室にGOLFZON社の最高級シミュレーター「VISION Plus」を採用。
