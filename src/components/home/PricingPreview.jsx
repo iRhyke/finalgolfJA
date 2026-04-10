@@ -2,39 +2,60 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronRight, Star, ChevronDown } from "lucide-react";
+import { ChevronRight, Star, ChevronDown, Check, Clock } from "lucide-react";
 
 const plans = [
   {
-    name: "ライトプラン",
-    price: "12,980",
-    period: "月4回",
-    time: "全日24時間",
+    name: "ナイトタイム",
+    price: "8,980",
+    time: "全日 23:00〜5:00",
+    slots: "同時1枠",
+    limit: "回数制限なし",
     popular: false,
-    id: "light",
-  },
-  {
-    name: "オールタイム",
-    price: "19,800",
-    period: "回数無制限",
-    time: "全日24時間",
-    popular: true,
-    id: "alltime",
+    features: ["深夜・早朝の練習に最適", "1枠80分", "VISION Plus利用可能"],
   },
   {
     name: "平日デイタイム",
     price: "9,980",
-    period: "回数無制限",
-    time: "平日10:00〜17:00",
+    time: "平日 10:00〜17:00",
+    slots: "同時1枠",
+    limit: "回数制限なし",
     popular: false,
-    id: "weekday",
+    features: ["平日日中の練習に", "1枠80分", "VISION Plus利用可能"],
+  },
+  {
+    name: "ライトプラン",
+    price: "12,980",
+    time: "全日 24時間",
+    slots: "同時1枠",
+    limit: "月4回",
+    popular: false,
+    features: ["月4回のお手軽プラン", "1枠80分", "VISION Plus利用可能"],
+  },
+  {
+    name: "オールタイム",
+    price: "19,800",
+    time: "全日 24時間",
+    slots: "同時1枠",
+    limit: "回数制限なし",
+    popular: true,
+    features: ["24時間いつでも通い放題", "1枠80分", "VISION Plus利用可能", "一番人気のプラン"],
+  },
+  {
+    name: "オールタイムゴールド",
+    price: "24,800",
+    time: "全日 24時間",
+    slots: "同時2枠",
+    limit: "回数制限なし",
+    popular: false,
+    features: ["2枠同時予約可能", "1枠80分", "VISION Plus利用可能", "お友達と一緒に練習"],
   },
 ];
 
 export default function PricingPreview() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState(/** @type {number | null} */ (null));
 
-  const handleToggle = (index) => {
+  const handleToggle = (/** @type {number} */ index) => {
     if (window.innerWidth < 768) {
       setOpenIndex(openIndex === index ? null : index);
     }
@@ -57,81 +78,120 @@ export default function PricingPreview() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-          {plans.map((plan, index) => {
-             const isOpen = openIndex === index;
-             return (
-               <motion.div
-                 key={index}
-                 initial={{ opacity: 0, y: 20 }}
-                 whileInView={{ opacity: 1, y: 0 }}
-                 viewport={{ once: true }}
-                 transition={{ delay: index * 0.1 }}
-                 onClick={() => handleToggle(index)}
-                 className={`relative p-8 rounded-2xl border transition-all cursor-pointer md:cursor-default ${
-                   plan.popular
-                     ? "bg-[#0F3D25] text-white border-transparent shadow-2xl shadow-[#0F3D25]/20 md:scale-[1.02]"
-                     : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-lg"
-                 }`}
-               >
-                 {plan.popular && (
-                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                     <span className="inline-flex items-center gap-1 px-4 py-1 bg-[#C8A96E] text-white text-xs font-semibold rounded-full whitespace-nowrap">
-                       <Star className="w-3 h-3" />
-                       人気No.1
-                     </span>
-                   </div>
-                 )}
+       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            {plans.filter(plan => plan.name === "オールタイム" || plan.name === "オールタイムゴールド").map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className={`relative p-8 rounded-2xl border transition-all ${
+                  plan.popular
+                    ? "bg-[#0F3D25] text-white border-transparent shadow-2xl shadow-[#0F3D25]/20"
+                    : "bg-white border-gray-200 hover:border-gray-300 hover:shadow-lg"
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="inline-flex items-center gap-1 px-4 py-1 bg-[#C8A96E] text-white text-xs font-semibold rounded-full">
+                      <Star className="w-3 h-3" />
+                      人気No.1
+                    </span>
+                  </div>
+                )}
+                <h3 className={`text-sm font-semibold ${plan.popular ? "text-[#C8A96E]" : "text-gray-500"}`}>
+                  {plan.name}
+                </h3>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="text-5xl font-bold">¥{plan.price}</span>
+                  <span className={`text-sm ${plan.popular ? "text-white/60" : "text-gray-400"}`}>/月（税込）</span>
+                </div>
+                <div className={`mt-6 space-y-2 text-sm ${plan.popular ? "text-white/70" : "text-gray-500"}`}>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 flex-shrink-0" />
+                    <span>{plan.time}</span>
+                  </div>
+                  <p>{plan.slots} / {plan.limit}</p>
+                </div>
+                <div className="mt-6 pt-6 border-t border-dashed border-gray-200/30">
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.popular ? "text-[#C8A96E]" : "text-[#1B5E3B]"}`} />
+                        <span className={`text-sm ${plan.popular ? "text-white/80" : "text-gray-600"}`}>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  to={`/trial?plan=${encodeURIComponent(plan.name)}`}
+                  className={`mt-8 block text-center py-3 rounded-full font-semibold text-sm transition-all ${
+                    plan.popular
+                      ? "bg-[#C8A96E] hover:bg-[#b8995e] text-white"
+                      : "bg-[#1B5E3B] hover:bg-[#0F3D25] text-white"
+                  }`}
+                >
+                  このプランで始める
+                </Link>
+              </motion.div>
+            ))}
+          </div>
 
-                 <div className="flex justify-between items-center">
-                   <h3 className={`text-sm font-semibold ${plan.popular ? "text-[#C8A96E]" : "text-gray-500"}`}>
-                     {plan.name}
-                   </h3>
-                   <ChevronDown 
-                     className={`w-5 h-5 md:hidden transition-transform duration-300 ${isOpen ? "rotate-180" : ""} ${plan.popular ? "text-white/70" : "text-gray-400"}`} 
-                   />
-                 </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {plans.filter(plan => plan.name === "ライトプラン" || plan.name === "平日デイタイム" || plan.name === "ナイトタイム").map((plan, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+                className="relative p-6 rounded-2xl border bg-white border-gray-200 hover:border-gray-300 hover:shadow-lg transition-all"
+              >
+                <h3 className="text-sm font-semibold text-gray-500">{plan.name}</h3>
+                <div className="mt-4 flex items-baseline gap-1">
+                  <span className="text-4xl font-bold">¥{plan.price}</span>
+                  <span className="text-sm text-gray-400">/月（税込）</span>
+                </div>
+                <div className="mt-4 space-y-2 text-sm text-gray-500">
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4 flex-shrink-0" />
+                    <span>{plan.time}</span>
+                  </div>
+                  <p>{plan.slots} / {plan.limit}</p>
+                </div>
+                <div className="mt-4 pt-4 border-t border-dashed border-gray-200">
+                  <ul className="space-y-2">
+                    {plan.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <Check className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#1B5E3B]" />
+                        <span className="text-sm text-gray-600">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Link
+                  to={`/trial?plan=${encodeURIComponent(plan.name)}`}
+                  className="mt-6 block text-center py-3 rounded-full font-semibold text-sm transition-all bg-[#1B5E3B] hover:bg-[#0F3D25] text-white"
+                >
+                  このプランで始める
+                </Link>
+              </motion.div>
+            ))}
+          </div>
 
-                 <div className="mt-4 flex items-baseline gap-1">
-                   <span className="text-4xl font-bold">¥{plan.price}</span>
-                   <span className={`text-sm ${plan.popular ? "text-white/60" : "text-gray-400"}`}>/月</span>
-                 </div>
 
-                 <div className={`mt-4 overflow-hidden transition-all duration-300 ease-in-out md:max-h-[500px] md:opacity-100 ${isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
-                   <div className={`text-sm ${plan.popular ? "text-white/70" : "text-gray-500"}`}>
-                     <p className="mb-1">{plan.time}</p>
-                     <p>{plan.period}</p>
-                   </div>
-                   
-                   <div className="mt-6">
-                     <Link
-                       to={`/trial?plan=${plan.id}`}
-                       onClick={(e) => e.stopPropagation()}
-                       className={`group flex items-center justify-center gap-2 w-full py-3 px-4 rounded-full text-sm font-bold transition-all ${
-                         plan.popular
-                           ? "bg-[#C8A96E] hover:bg-[#b8995e] text-white"
-                           : "bg-[#1B5E3B] hover:bg-[#0F3D25] text-white"
-                       }`}
-                     >
-                       このプランで体験予約
-                       <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                     </Link>
-                   </div>
-                 </div>
-               </motion.div>
-             );
-          })}
-        </div>
-
-        <div className="text-center mt-10">
-          <Link
-            to={createPageUrl("Pricing")}
-            className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
-          >
-            全てのプランを見る
-            <ChevronRight className="w-4 h-4" />
-          </Link>
-        </div>
+         <div className="text-center mt-10">
+            <Link
+             to={createPageUrl("Pricing")}
+             className="inline-flex items-center gap-2 text-[#1B5E3B] font-semibold text-sm hover:gap-3 transition-all"
+           >
+             全てのプランを見る
+             <ChevronRight className="w-4 h-4" />
+           </Link>
+         </div>
+        </div> 
       </div>
     </section>
   );
