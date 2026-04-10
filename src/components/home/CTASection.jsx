@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
-const ctaContent = {
+const ctaContent = /** @type {Record<string, {title: string, description: string} | undefined>} */ ({
   // homeページ
   default: {
     title: "まずは体験からはじめてみませんか？",
@@ -29,14 +29,14 @@ const ctaContent = {
     title: "まずは体験から始めましょう",
     description: "疑問が解決したら、ぜひ実際に体験してみてください。",
   },
-};
+});
 
 export default function CTASection({
   page = "default",
   primaryText = "無料体験を予約する",
   primaryLink = "/trial",
 }) {
-  const { title, description } = ctaContent[page] || ctaContent.default;
+  const { title, description } = ctaContent[page] ?? ctaContent.default ?? { title: "", description: "" };
   return (
     <section className="py-24 lg:py-32 green-gradient relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
