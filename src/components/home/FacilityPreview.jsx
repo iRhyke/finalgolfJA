@@ -70,30 +70,30 @@ export default function FacilityPreview() {
               className="rounded-2xl overflow-hidden aspect-[4/3]"
             >
               <img
-                src="/images/exterior-w800.jpg"
+                src="/images/DSC00706-Pano.jpg"
                 alt="施設外観"
                 className="w-full h-full object-cover"
               />
             </motion.div>
           </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {facilities.map((item, index) => (
-                <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="p-8 rounded-2xl bg-[#F9FAFB] hover:shadow-lg transition-all duration-300"
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {facilities.map((item, index) => (
+               <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="p-8 rounded-2xl bg-[#F9FAFB] hover:shadow-lg transition-all duration-300"
                 >
-                    <div className="w-12 h-12 rounded-xl bg-[#1B5E3B]/5 flex items-center justify-center mb-5">
-                    <item.icon className="w-5 h-5 text-[#1B5E3B]" />
-                    </div>
-                    <h3 className="text-lg font-bold text-[#111111] mb-2">{item.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
-                </motion.div>
-                ))}
-            </div>
+                  <div className="w-12 h-12 rounded-xl bg-[#1B5E3B]/5 flex items-center justify-center mb-5">
+                  <item.icon className="w-5 h-5 text-[#1B5E3B]" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#111111] mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
