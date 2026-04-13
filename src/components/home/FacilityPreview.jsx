@@ -35,7 +35,7 @@ const facilities = [
 ];
 
 const gallery = [
-  { src: "/images/exterior-w800.jpg", alt: "施設外観" },
+  { src: "/images/DSC00706-Pano.jpg", alt: "施設外観" },
   { src: "/images/visonplus_1920.jpg", alt: "シミュレーター" },
 ];
 
