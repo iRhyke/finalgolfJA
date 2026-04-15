@@ -239,7 +239,7 @@ export default function Facility() {
               className="rounded-2xl overflow-hidden aspect-[4/3]"
             >
               <img
-                src="/images/exterior-w800.jpg"
+                src="/images/DSC00706-Pano.jpg"
                 alt="施設外観"
                 className="w-full h-full object-cover"
               />
