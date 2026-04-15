@@ -8,7 +8,7 @@ export default function HeroSection() {
     <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1920&q=80"
+          src="/images/edited/DSC00650.jpg"
           alt="ゴルフ"
           className="w-full h-full object-cover"
         />

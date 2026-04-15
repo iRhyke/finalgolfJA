@@ -1,8 +1,8 @@
-import React from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import PageHeader from "../components/shared/PageHeader";
 import CTASection from "../components/home/CTASection";
-import { Monitor, Users, Clock, Shield } from "lucide-react";
+import { Monitor, Users, Clock, Shield, ChevronLeft, ChevronRight, X, ZoomIn } from "lucide-react";
 
 const facilities = [
   {
@@ -27,22 +27,182 @@ const facilities = [
   },
 ];
 
-const gallery = [
+const images = [
   {
-    src: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=600&q=80",
+    src: "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=1200&q=80",
+    thumb: "https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=400&q=80",
+    alt: "シミュレーター打席",
+    label: "シミュレーター打席",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1200&q=80",
+    thumb: "https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=400&q=80",
     alt: "ゴルフ練習",
+    label: "プレー風景",
   },
   {
-    src: "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=600&q=80",
-    alt: "シミュレーター",
+    src: "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=1200&q=80",
+    thumb: "https://images.unsplash.com/photo-1587174486073-ae5e5cff23aa?w=400&q=80",
+    alt: "コース映像",
+    label: "コース映像",
   },
   {
-    src: "https://images.unsplash.com/photo-1592919505780-303950717480?w=600&q=80",
-    alt: "ゴルフクラブ",
+    src: "https://images.unsplash.com/photo-1592919505780-303950717480?w=1200&q=80",
+    thumb: "https://images.unsplash.com/photo-1592919505780-303950717480?w=400&q=80",
+    alt: "クラブ・設備",
+    label: "設備・備品",
   },
 ];
 
-export default function facility() {
+function Lightbox({ index, onClose, onPrev, onNext }) {
+  const img = images[index];
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center px-4"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+      >
+        <X className="w-5 h-5 text-white" />
+      </button>
+
+      <button
+        onClick={(e) => { e.stopPropagation(); onPrev(); }}
+        className="absolute left-4 sm:left-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+      >
+        <ChevronLeft className="w-6 h-6 text-white" />
+      </button>
+
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.25 }}
+        className="max-w-4xl w-full mx-16"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <img
+          src={img.src}
+          alt={img.alt}
+          className="w-full max-h-[75vh] object-contain rounded-xl"
+        />
+        <p className="text-center text-white/60 text-sm mt-4">
+          {img.label}　{index + 1} / {images.length}
+        </p>
+      </motion.div>
+
+      <button
+        onClick={(e) => { e.stopPropagation(); onNext(); }}
+        className="absolute right-4 sm:right-8 w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-colors"
+      >
+        <ChevronRight className="w-6 h-6 text-white" />
+      </button>
+    </motion.div>
+  );
+}
+
+function Carousel({ onOpenLightbox }) {
+  const [current, setCurrent] = useState(0);
+
+  const prev = () => setCurrent((c) => (c - 1 + images.length) % images.length);
+  const next = () => setCurrent((c) => (c + 1) % images.length);
+
+  return (
+    <div className="relative rounded-2xl overflow-hidden aspect-[16/9] max-w-3xl mx-auto">
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={current}
+          src={images[current].src}
+          alt={images[current].alt}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -40 }}
+          transition={{ duration: 0.35 }}
+          className="w-full h-full object-cover"
+        />
+      </AnimatePresence>
+
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+        <span className="px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-white text-xs font-medium">
+          {images[current].label}
+        </span>
+      </div>
+
+      <button
+        onClick={() => onOpenLightbox(current)}
+        className="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center transition-colors"
+      >
+        <ZoomIn className="w-4 h-4 text-white" />
+      </button>
+
+      <button
+        onClick={prev}
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center transition-colors"
+      >
+        <ChevronLeft className="w-5 h-5 text-white" />
+      </button>
+
+      <button
+        onClick={next}
+        className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center transition-colors"
+      >
+        <ChevronRight className="w-5 h-5 text-white" />
+      </button>
+
+      <div className="absolute bottom-4 right-4 flex gap-1.5">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            className={`w-2 h-2 rounded-full transition-all ${
+              i === current ? "bg-white w-5" : "bg-white/40"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ThumbnailGrid({ onOpenLightbox }) {
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mt-4 max-w-3xl mx-auto">
+      {images.map((img, i) => (
+        <button
+          key={i}
+          onClick={() => onOpenLightbox(i)}
+          className="group relative rounded-xl overflow-hidden aspect-[4/3] focus:outline-none"
+        >
+          <img
+            src={img.thumb}
+            alt={img.alt}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-400"
+          />
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+            <ZoomIn className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
+          <span className="absolute bottom-0 left-0 right-0 py-1.5 text-center text-white text-[11px] font-medium bg-gradient-to-t from-black/60 to-transparent">
+            {img.label}
+          </span>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+export default function Facility() {
+  const [lightboxIndex, setLightboxIndex] = useState(null);
+
+  const openLightbox = (i) => setLightboxIndex(i);
+  const closeLightbox = () => setLightboxIndex(null);
+  const prevLightbox = () => setLightboxIndex((i) => ((i ?? 0) - 1 + images.length) % images.length);
+  const nextLightbox = () => setLightboxIndex((i) => ((i ?? 0) + 1) % images.length);
+
   return (
     <div>
       <PageHeader
@@ -109,32 +269,40 @@ export default function facility() {
 
       <section className="py-20 lg:py-28 bg-[#F9FAFB]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
             <span className="text-[#C8A96E] text-sm font-semibold tracking-widest uppercase">Gallery</span>
             <h2 className="mt-3 text-3xl font-bold text-[#111111]">フォトギャラリー</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {gallery.map((img, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="rounded-2xl overflow-hidden aspect-[4/3]"
-              >
-                <img
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </motion.div>
-            ))}
-          </div>
+            <p className="mt-3 text-gray-400 text-sm">画像をクリックすると拡大表示できます</p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Carousel onOpenLightbox={openLightbox} />
+            <ThumbnailGrid onOpenLightbox={openLightbox} />
+          </motion.div>
         </div>
       </section>
 
-      <CTASection page="facility" />
+      <CTASection />
+
+      <AnimatePresence>
+        {lightboxIndex !== null && (
+          <Lightbox
+            index={lightboxIndex}
+            onClose={closeLightbox}
+            onPrev={prevLightbox}
+            onNext={nextLightbox}
+          />
+        )}
+      </AnimatePresence>
     </div>
   );
 }
