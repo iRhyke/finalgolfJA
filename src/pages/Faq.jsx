@@ -76,7 +76,7 @@ const faqData = [
   },
 ];
 
-function faqItem({ question, answer }) {
+function FaqItem({ question, answer }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -108,7 +108,7 @@ function faqItem({ question, answer }) {
   );
 }
 
-export default function faq() {
+export default function Faq() {
   return (
     <div>
       <PageHeader
@@ -134,7 +134,7 @@ export default function faq() {
               </h2>
               <div className="bg-[#F9FAFB] rounded-2xl px-6">
                 {section.questions.map((item, i) => (
-                  <faqItem key={i} question={item.q} answer={item.a} />
+                  <FaqItem key={i} question={item.q} answer={item.a} />
                 ))}
               </div>
             </motion.div>
