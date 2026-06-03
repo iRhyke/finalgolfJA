@@ -14,13 +14,13 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <FacilityPreview /> 
+      <FacilityPreview />
       <FeaturesSection />
       <SimulatorPreview />
       <PricingPreview />
       <FlowSection />
       <AccessPreview />
-      <LINESection />
+
       <CTASection />
     </div>
   );
